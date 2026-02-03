@@ -28,8 +28,8 @@ int main(int argc, char* argv[]) {
       std::cout << "template:\n";
       std::cout << "crun [ARGUMENT]\n";
       std::cout << std::endl;
-      std::cout << "Created by Nos0kCC\n";
-      std::cout << "GitHub: https://github.com/Nos0kCC\n";
+      std::cout << "Created by Nos0kkk\n";
+      std::cout << "GitHub: https://github.com/Nos0kkk\n";
       std::cout << "tg chanle: https://t.me/BioNos0k\n";
       return 1;
     }

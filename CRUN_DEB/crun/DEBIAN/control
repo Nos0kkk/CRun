@@ -1,6 +1,6 @@
 Package: crun
 Version: 1.0
 Architecture: aarch64
-Maintainer: Nos0kCC <nos0kdev@gmail.com>
+Maintainer: Nos0kkk <nos0kdev@gmail.com>
 Description: simple lib for assembly project C/C++
 Depends: libc++ | libc
