@@ -13,5 +13,3 @@ or
 ```bash
 dpkg -i crun.deb
 ```
-
-# Warning this is version build for termux
