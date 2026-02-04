@@ -2,14 +2,12 @@
 
 # How to install?
 
-```bash
-cd crun/CRUN_DEB
-```
-
-```bash
+```termux
+cd crun/CRUN_DEB_TERMUX
 pkg install ./crun.deb
 ```
-or
-```bash
+
+```linux
+cd crun/CRUN_DEB_LINUX
 dpkg -i crun.deb
 ```
