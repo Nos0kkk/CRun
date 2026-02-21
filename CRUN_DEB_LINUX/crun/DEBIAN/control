@@ -1,6 +1,6 @@
 Package: crun
 Version: 1.0
-Architecture: aarch64
+Architecture: x86-64
 Maintainer: Nos0kkk <nos0kdev@gmail.com>
 Description: simple lib for assembly project C/C++
-Depends: libc++ | libc
+Depends: libc++ | libc, jsoncpp

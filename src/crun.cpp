@@ -22,12 +22,36 @@ int main(int argc, char* argv[]) {
       std::cout << "all flags:\n";
       std::cout << "  -h\t--help - help list\n";
       std::cout << "  -l\t--log - compiler and view logs in runtime\n";
-      std::cout << "  \t.. - compiler\n";
+      std::cout << "  ..\t     - compiler\n";
       std::cout << "  -lc\t --launch - launch assembled project (executable only)\n";
       std::cout << std::endl;
       std::cout << "template:\n";
       std::cout << "crun [ARGUMENT]\n";
       std::cout << std::endl;
+      
+      std::cout << "template CRun.json:\n";
+      std::cout << "{\n";
+      std::cout << R"(  "setCompiler" : "g++",)" << std::endl;
+      std::cout << R"(  "setFlags" : "-Llibs -o",)" << std::endl;
+      std::cout << R"(  "setFiles" : )" << std::endl;
+      std::cout << "  {\n";
+      std::cout << R"(    "setSrcFile" : "main.cpp",)" << std::endl;
+      std::cout << R"(    "setExecFile" : "main")" << std::endl;
+      std::cout << "  },\n";
+      std::cout << R"(  "setLibs" : "-lc++_shared",)" << std::endl;
+      std::cout << R"(  "autoStart" : false)" << std::endl;
+      std::cout << "}\n";
+      std::cout << std::endl;
+      
+      std::cout << R"("setCompiler" — Select Compiler)" << std::endl;
+      std::cout << R"("setFlags" — set compilation flags)" << std::endl;
+      std::cout << R"("setFiles" — Working with files)" << std::endl;
+      std::cout << R"(  |—— "setSrcFile" — Set Source Code)" << std::endl; 
+      std::cout << R"(  |__ "setExecFile" — add executable file)" << std::endl;
+      std::cout << R"("setLibs" — connect libraries)" << std::endl;
+      std::cout << R"("autoStart" — whether to run the binary immediately after compilation)" << std::endl;
+      std::cout << std::endl;
+      
       std::cout << "Created by Nos0kkk\n";
       std::cout << "GitHub: https://github.com/Nos0kkk\n";
       std::cout << "tg chanle: https://t.me/BioNos0k\n";
