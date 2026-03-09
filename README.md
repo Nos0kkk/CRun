@@ -1,18 +1,18 @@
-# crun is a simple utility for compiling C/C++ project
+# CRUN
+this is simple C/C++ builder
+
+![](crun_logo.jpeg)
+_logo_
 
 # How to install?
-Termux:
 
+***debian/ubuntu/mint/kali/astra/...***
 ```bash
-cd crun/CRUN_DEB_TERMUX
-pkg install ./crun.deb
+./build.sh --linux-debian
 ```
-
-Linux:
-
+***Termux (Android)***
 ```bash
-cd crun/CRUN_DEB_LINUX
-dpkg -i crun.deb
+./build.sh --android-termux
 ```
 
 # Usage
@@ -22,35 +22,43 @@ more information:
 crun --help
 ```
 
-CRun.json syntax:
-template
-```json
-{
-  "setCompiler" : "g++",
-  "setFlags" : "-static -o",
-  "setFiles" : 
-  {
-    "setSrcFile" : "src/main.cpp",
-    "setExecFile" : "main"
-  },
-  "setLibs" : "-lc++_shared",
-  "autoStart" : false
-}
+***Template*** ```build.crun```:
+```build.crun
+COMPILER=clang
+FLAGS={-g -o}
+SRC={myapp.cpp myapp2.cpp}
+EXEC=myapp
+LIBS={-lc++ -lc -lm}
 ```
 
 What and how?
 
-```setCompiler``` - your compiler (`g++`, `gcc`, `clang`, `mingw`)
+```COMPILER``` - your compiler (`g++`, `gcc`, `clang`, `mingw`)
 
-```setFlags``` - flags for compiling your project
+```FLAGS``` - flags for compiling your project
 
-```setFiles``` - Duplicate key
+```SRC``` - Adding the source file with the code
 
-ㅤㅤ```setSrcFile``` - Adding the source file with the code
+```EXEC``` - Adding an executable file
 
-ㅤㅤ```setExecFile``` - Adding an executable file
+```LIBS``` - Connection of library libraries (dynamic/static)
 
-```setLibs``` - Connection of library libraries (dynamic/static)
+# TODO:
+***build.sh:***
+- [x] debian
+- [x] ubuntu
+- [x] kali
+- [x] astra
+- [x] mint
+- [ ] arch
+- [ ] fedora
+- [ ] void
+- [x] termux (android)
 
-```autoStart``` - whether the executable will run immediately after compilation (the only one takes a Boolean value)
- 
+***crun***
+- [x] start
+- [x] minimum depends
+- [x] new parser
+- [ ] more function
+
+# Thank you <3
