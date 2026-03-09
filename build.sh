@@ -9,7 +9,7 @@ if [ "$1" = "--linux-debian" ]; then
   sudo chmod 755 BUILD_CRUN/crun/DEBIAN/control
   sudo chmod 755 BUILD_CRUN/crun/DEBIAN
   echo "Package: crun
-Version: 1.0
+Version: 1.5
 Architecture: x86-64
 Maintainer: Nos0kkk <nos0kdev@gmail.com>
 Description: simple lib for assembly project C/C++
@@ -33,7 +33,7 @@ elif [ "$1" = "--android-termux" ]; then
   chmod 755 BUILD_CRUN/crun/DEBIAN/control
   chmod 755 BUILD_CRUN/crun/DEBIAN
   echo "Package: crun
-Version: 1.0
+Version: 1.5
 Architecture: aarch64
 Maintainer: Nos0kkk <nos0kdev@gmail.com>
 Description: simple lib for assembly project C/C++
