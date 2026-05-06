@@ -1,4 +1,4 @@
 COMPILER=g++
-FLAGS={-g -o}
+FLAGS={-g}
 SRC={main.cpp}
 EXEC=main

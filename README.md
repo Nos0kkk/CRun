@@ -6,13 +6,27 @@ _logo_
 
 # How to install?
 
+## build.sh
 ***debian/ubuntu/mint/kali/astra/...***
-```bash
+```shell
 ./build.sh --linux-debian
 ```
 ***Termux (Android)***
-```bash
+```shell
 ./build.sh --android-termux
+```
+
+## CMake
+***all system***
+```shell
+# in source directory
+mkdir build && cd build
+cmake ..
+make
+
+# for move executable in dir 'bin'
+# ONLY LINUX
+cmake --build .. --target install
 ```
 
 # Usage
@@ -25,24 +39,23 @@ crun --help
 ***Template*** ```build.crun```:
 ```build.crun
 COMPILER=clang
-FLAGS={-g -o}
+FLAGS={-g}
 SRC={myapp.cpp myapp2.cpp}
 EXEC=myapp
-LIBS={-lc++ -lc -lm}
+LIBS={-lboost}
 ```
 
 What and how?
 
 ```COMPILER``` - your compiler (`g++`, `gcc`, `clang`, `mingw`)
 
-```FLAGS``` - flags for compiling your project
+```FLAGS``` - flags for compiling your project (flag '-o' put automatically)
 
 ```SRC``` - Adding the source file with the code
 
 ```EXEC``` - Adding an executable file
 
-```LIBS``` - Connection of library libraries (dynamic/static)
-
+```LIBS``` - Connection of libraries
 # TODO:
 ***build.sh:***
 - [x] debian

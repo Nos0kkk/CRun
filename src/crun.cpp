@@ -7,43 +7,40 @@
 #include <regex>
 #include <atomic>
 
+void helpmsg() {
+  std::cout << R"(crun - simple utility for build C/C++ project
+
+Usage: crun [option]
+
+template build.crun:
+  COMPILER=g++
+  FLAGS={-g}
+  SRC={src/main.cpp}
+  EXEC=MyApp
+  LIBS={-lboost}
+
+Flags:
+  -h   --help          - its message
+  -l   --log           - build and view logs
+  ..                   - build (current directory)
+  -lc  --launch        - pojav executable
+  -vc  --view-command  - view build command
+
+By Nos0kkk
+github:   https://github.com/Nos0kkk/
+telegram: https://t.me/BioNos0k/)" << std::endl;
+}
+
 int main(int argc, char* argv[]) {
-  if (argc > 0) {
+  if (argc > 1) {
     try {
-      if (std::string(argv[1]) != ".." && std::string(argv[1]) != "-h" &&
-      std::string(argv[1]) != "--help" && std::string(argv[1]) != "-l" &&
-      std::string(argv[1]) != "--log" && std::string(argv[1]) != "-lc" &&
-      std::string(argv[1]) != "--launch") {
-        std::cerr << "crun: " << argv[1] << " not found" << std::endl;
-        std::cerr << "crun: 'crun --help' more information" << std::endl;
-        return 1;
+      if (!std::regex_match(std::string(argv[1]), std::regex(R"((-h|--help|-l|--log|\.\.|-lc|--launch|-vc|--view-command))"))) {
+        std::cerr << "crun: '" << argv[1] << "' not found\ncrun: 'crun --help' more information" << std::endl;
+        return -1;
       }
-  
+
       if (std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help") {
-        std::cout << "Crun the simple and easy lib, for make your project\n";
-        std::cout << std::endl;
-        std::cout << "all flags:\n";
-        std::cout << "  -h\t--help - help list\n";
-        std::cout << "  -l\t--log - compiler and view logs in runtime\n";
-        std::cout << "  ..\t     - compiler\n";
-        std::cout << "  -lc\t --launch - launch assembled project (executable only)\n";
-        std::cout << std::endl;
-        std::cout << "template:\n";
-        std::cout << "crun [ARGUMENT]\n";
-        std::cout << std::endl;
-        std::cout << "template build.crun:" << std::endl;
-        std::cout << R"(
-COMPILER=clang
-FLAGS={-g -o}
-SRC={src/myapp.cpp}
-EXEC=myapp
-LIBS={-lc++ -lc -lm}
-)" << std::endl;
-        std::cout << std::endl;
-      
-        std::cout << "Created by Nos0kkk\n";
-        std::cout << "GitHub: https://github.com/Nos0kkk\n";
-        std::cout << "tg chanle: https://t.me/BioNos0k\n";
+        helpmsg();
         return 1;
       }
   
@@ -52,6 +49,10 @@ LIBS={-lc++ -lc -lm}
   
       std::string buildcrun = path.string() + "/build.crun";
       std::ifstream file(buildcrun);
+      if (!file.is_open()) {
+        std::cerr << "crun: Error: cannot open is build.crun" << std::endl;
+        return -1;
+      }
       
       for (int i = 1; i < argc; i++) {
         if (std::string(argv[i]) == ".." && i + 1 <= argc) {
@@ -168,12 +169,17 @@ LIBS={-lc++ -lc -lm}
         }
         
         if (std::string(argv[i]) == "-lc" || std::string(argv[i]) == "--launch" && i + 1 < argc && line.substr(0, line.find('=')) == "EXEC") {
+          if (exec.empty()) {
+            std::cerr << "crun: Error: executable file not found" << std::endl;
+            return -1;
+          }
+
           std::string launch_command = "./" + exec;
           system(launch_command.c_str());
           return 1;
         }
         
-        std::atomic<bool> end{false};
+        std::atomic<bool> end = false;
         
         std::thread t([&end](){
           while (true) {
@@ -195,15 +201,24 @@ LIBS={-lc++ -lc -lm}
         });
         t.detach();
        
-        std::string fullcommand = compiler + " " + flags + " " + exec + " " + src + " " + libs;
-        system(fullcommand.c_str());
+        std::string fullcommand = compiler + " " + flags + (std::regex_search(flags, std::regex(R"(-o)")) ? " " : " -o ") + exec + " " + src + " " + libs;
+        if (std::string(argv[1]) == "-vc" || std::string(argv[1]) == "--view-command") {
+          if (fullcommand.empty()) {
+            std::cerr << "crun: Error: buipd.crun not found or empty" << std::endl;
+            return -1;
+          }
+          std::cout << fullcommand << std::endl;
+        } else {
+          system(fullcommand.c_str());
+        }
         
         end = true;
       }
-    }
-    catch (std::runtime_error& e) {
+    } catch (std::runtime_error& e) {
       std::cerr << e.what() << std::endl;
     }
+  } else {
+    helpmsg();
   }
   return 0;
 }
